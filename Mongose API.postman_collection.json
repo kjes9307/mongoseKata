@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "0e343083-8eb9-4186-8432-dc7b7f9ecf46",
+		"name": "Mongose API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gentle-oasis-23800.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"gentle-oasis-23800",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"海景套房6\",\r\n    \"rating\" : 4.5,\r\n    \"price\": 5000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gentle-oasis-23800.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"gentle-oasis-23800",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Delete All",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://gentle-oasis-23800.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"gentle-oasis-23800",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Patch",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"name\" : \"天下無敵套房2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gentle-oasis-23800.herokuapp.com/posts/6268c0731478f245c177d817",
+					"protocol": "https",
+					"host": [
+						"gentle-oasis-23800",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"6268c0731478f245c177d817"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Delete One",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://gentle-oasis-23800.herokuapp.com/posts/6268c0731478f245c177d817",
+					"protocol": "https",
+					"host": [
+						"gentle-oasis-23800",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"6268c0731478f245c177d817"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
