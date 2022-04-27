@@ -69,7 +69,7 @@ const service = async function(req,res){
     req.on('data',chunk =>{body+=chunk});
     
     if(req.method ==='GET'){
-        let regex = /^\/todos$/gi;
+        let regex = /^\/posts$/gi;
         switch (true){
             case regex.test(url):
                 const data = await Room.find();
@@ -78,12 +78,12 @@ const service = async function(req,res){
                 reponseHandle(200,"TODO API (GET)","200",result,res);
                 break;
             default:
-                // errorHandle(400,"TODO API (GET)","Failed,Not Found",result,res);
+                errorHandle(400,"TODO API (GET)","404",result,res);
                 break;
         }   
     }
     else if (req.method ==='POST'){
-        let regex = /^\/todos$/gi;
+        let regex = /^\/posts$/gi;
         switch (true){
             case regex.test(url):
                 req.on('end',async ()=>{
@@ -112,13 +112,13 @@ const service = async function(req,res){
             break;
         }
     }else if (req.method ==='DELETE'){
-        let regex = /^\/todos$/gi;
-        let regex2 = /^\/todos\//gi;
+        let regex = /^\/posts$/gi;
+        let regex2 = /^\/posts\//gi;
         switch(true){
             case regex.test(url):
                 const data = await Room.deleteMany();
                 console.log("database=",data)
-                result['data']=data;
+                result['data']=[];
                 reponseHandle(200,"TODO API (DELETE ALL)","Good",result,res);
                 break;
             case regex2.test(url):
@@ -128,7 +128,7 @@ const service = async function(req,res){
                         console.log(`${deleteID}`)
                         let data = await Room.findByIdAndDelete(`${deleteID}`);
                         result['data']=data;
-                        reponseHandle(200,"TODO API (DELETE ONE)"+`=${deleteID} delete ok`,"Good",result,res);
+                        reponseHandle(200,`TODO API (DELETE ONE)=${deleteID} delete ok`,"Good",result,res);
                     }catch(err){
                         errorHandle(400,`TODO API (DELETE)=${err}`,"Input Error",result,res);
                         console.log(err)
@@ -141,8 +141,7 @@ const service = async function(req,res){
         }
     }
     else if (req.method ==='PATCH'){
-        let regex = /^\/todos$/gi;
-        let regex2 = /^\/todos\//gi;
+        let regex2 = /^\/posts\//gi;
         switch(true){ //123
             case regex2.test(url): //test123
                 req.on("end",async ()=>{
