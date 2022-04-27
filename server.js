@@ -128,7 +128,11 @@ const service = async function(req,res){
                         console.log(`${deleteID}`)
                         let data = await Room.findByIdAndDelete(`${deleteID}`);
                         result['data']=data;
-                        reponseHandle(200,`TODO API (DELETE ONE)=${deleteID} delete ok`,"Good",result,res);
+                        if(data !== null){
+                            reponseHandle(200,`TODO API (DELETE ONE)=${deleteID} delete ok`,"Good",result,res);
+                        }else{
+                            reponseHandle(200,`TODO API (DELETE ONE)= id not match any result`,"Good",result,res);
+                        }
                     }catch(err){
                         errorHandle(400,`TODO API (DELETE)=${err}`,"Input Error",result,res);
                         console.log(err)
@@ -150,7 +154,12 @@ const service = async function(req,res){
                         let editID = url.split("/").pop();
                         let data = await Room.findByIdAndUpdate(`${editID}`,{"name":`${editItem}`});
                         result['data']=data;
-                        reponseHandle(200,"TODO API (PATCH)","Good",result,res);
+                        if(data !== null){
+                            reponseHandle(200,"TODO API (PATCH)","Good",result,res);
+                        }else{
+                            reponseHandle(200,`TODO API (PATCH)= ID not match any result`,"Good",result,res);
+                        }
+                    
                     }catch(err){
                         errorHandle(400,`TODO API (PATCH)=${err}`,"Todo Intput Error",result,res);
                     };
