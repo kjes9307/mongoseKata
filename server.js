@@ -83,7 +83,7 @@ const service = async function(req,res){
                             reponseHandle(200,`TODO API (DELETE ONE)=${deleteID} delete ok`,result,res);
                         }else{
                             result['data']=[];
-                            reponseHandle(200,`TODO API (DELETE ONE)= ID not found`,result,res);
+                            reponseHandle(404,`TODO API (DELETE ONE)= ID not found`,result,res);
                         }
                     }catch(err){
                         reponseHandle(404,`TODO API (DELETE)=${err}`,result,res);
@@ -102,24 +102,32 @@ const service = async function(req,res){
             case chkParam.test(url):
                 req.on("end",async ()=>{
                     try{
-                        let editItem = JSON.parse(body);
+                        if(Object.keys(JSON.parse(body)).length === 0){
+                            result['data']=[];
+                            reponseHandle(404,`TODO API (PATCH)= input error`,result,res);
+                            return;
+                        }
+                        let editName = JSON.parse(body).name;
+                        let editContent = JSON.parse(body).content;
+                        let editLikes = JSON.parse(body).likes;
+                        
                         let obj = {
-                            name: editItem.name,
-                            content: editItem.content,
-                            likes: editItem.likes
+                            name: editName,
+                            content: editContent,
+                            likes: editLikes
                         };
                         let editID = url.split("/").pop();
                         let data = await Post.findByIdAndUpdate(editID,obj,{ runValidators: true,new: true });
-                        console.log("show item=",data)
                         result['data']=data;
                         if(data !== null){
                             reponseHandle(200,"TODO API (PATCH)",result,res);
                         }else{
                             result['data']=[];
-                            reponseHandle(200,`TODO API (PATCH)= ID not found`,result,res);
+                            reponseHandle(404,`TODO API (PATCH)= ID not found`,result,res);
                         }
                     
                     }catch(err){
+                        result['data']=[];
                         reponseHandle(404,`TODO API (PATCH)=${err}`,result,res);
                     };
                 });
