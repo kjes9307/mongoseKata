@@ -8,18 +8,18 @@ const mongoose = require('mongoose');
           },
         content:{
             type: String,
-            required: [true,"價格必填"],
-            default : "write something here.."
+            required: [true,"內容必填"]
         },
         likes: {
             type: Number,
-            default : 0
+            default : 0,
+            select :true
         }
     },{
         versionKey: false,
         timestamps: true
     }
     );
-    const post = mongoose.model('post', postSchema);
+    const Post = mongoose.model('post', postSchema);
     
-    module.exports = post;
+    module.exports = Post;
