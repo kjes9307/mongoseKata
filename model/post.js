@@ -4,16 +4,19 @@ const mongoose = require('mongoose');
     const postSchema = new mongoose.Schema( {
         name: {
             type: String,
-            required: [true, '貼文姓名未填寫']
+            required: [true, '貼文姓名未填寫'],
+            cast: false
           },
         content:{
             type: String,
-            required: [true,"內容必填"]
+            required: [true,"內容必填"],
+            cast: false
         },
         likes: {
             type: Number,
             default : 0,
-            select :true
+            select :true,
+            cast: false
         }
     },{
         versionKey: false,

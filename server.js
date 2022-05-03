@@ -40,6 +40,7 @@ const service = async function(req,res){
                     // receive request 
                     try{
                         let addPost = JSON.parse(body)? JSON.parse(body) : "failed"
+                        console.log(typeof addPost.content)
                         if(addPost !== "failed"){
                             let resData = await Post.create(
                                 {
